@@ -1,4 +1,4 @@
-
+<?php if(!class_exists('Rain\Tpl')){exit;}?>
 <!-- START FOOTER FILE-->
 <div class="footer-top-area">
     <div class="zigzag-bottom"></div>
