@@ -17,6 +17,7 @@ require_once("vendor/autoload.php");
 
 use \Slim\Slim;
 use \Hcode\Page;
+use \Hcode\PageAdmin;
 
 $app = new Slim();
 
@@ -27,41 +28,38 @@ $app->config('debug', true);
  * ROUTES
  *---------------------------------------------------------------
  */
-
-$pages = array(
-	array(
-		'route' => "/",
-		// 'data'  => [],
-		'file'  => "index"
-	),
-	array(
-		'route' => "carrinho",
-		// 'data'  => [],
-		'file'  => "carrinho"
-	),
-	// array(
-	// 	'route' => "",
-	// 	// 'data'  => [],
-	// 	'file'  => ""
-	// ),
-);
-
-
-foreach ($pages as $p) {
-
-	$data = $p['data'];
-	$file = $p['file'];
 	
-	$app->get($p['route'], function() {
+$app->get("/", function() {
 
-		global $data , $file;
+	$page = new Page();
 
-		$page = $data ? new Page($data) : new Page();
-	
-		$page->setTpl($file);
-	
-	});
-}
+	$page->setTpl("index");
+
+});
+
+$app->get("/carrinho", function() {
+
+	$page = new Page();
+
+	$page->setTpl("carrinho");
+
+});
+
+/*
+ *---------------------------------------------------------------
+ * ADMIN ROUTES 
+ *---------------------------------------------------------------
+ */
+
+$admin = "/admin";
+
+$app->get( $admin , function() {
+
+	$page = new PageAdmin();
+
+	$page->setTpl("index");
+
+});
 
 
 /*
